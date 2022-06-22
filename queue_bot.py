@@ -3,9 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-
-#from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-
 import csv
 import telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
@@ -13,8 +10,8 @@ import os
 
 URL = 'https://registration.mfa.gov.ua/qmaticwebbooking/#/'
 
-api_key = '5552748824:AAGPQdrxaeSzL7jpqL3nsviPlMFoBLowFbY'
-user_id = 981556791
+api_key = '1111'
+user_id = 0
 
 def start(bot, context):
 	context.bot.send_message(chat_id=user_id, text="Подождите")
@@ -30,23 +27,18 @@ def start(bot, context):
 		seti.add_argument("--no-sandbox")
 		seti.add_argument("--headless")
 		seti.add_argument("--private")
-
 		seti.add_argument("start-maximized")
 		seti.add_argument("disable-infobars")
 		seti.add_argument("--disable-extensions")
 		seti.add_argument("--disable-gpu")
-
 		seti.add_experimental_option("prefs", prefs)
 
 		seti.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-
-		#binary = FirefoxBinary(os.environ.get("FIREFOX_BIN"))
 
 		browser = webdriver.Chrome(
 			executable_path=os.environ.get("CHROMEDRIVER_PATH"),
 			chrome_options=seti
 			)
-		#browser.set_window_size(1000, 10000)
 		browser.get(URL)
 		time.sleep(5)
 		table = browser.find_element(By.XPATH, '/html/body/div/div/div/div/div/ul')
@@ -85,7 +77,7 @@ def start(bot, context):
 
 def main():
     print('es')
-    TOKEN = "5552748824:AAGPQdrxaeSzL7jpqL3nsviPlMFoBLowFbY"
+    TOKEN = api_key
     updater = Updater(TOKEN, use_context=True)
     dispatcher = updater.dispatcher
 
